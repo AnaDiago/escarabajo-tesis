@@ -1,21 +1,66 @@
-\documentclass[a4paper,12pt,oneside]{book}
-\usepackage[utf8]{inputenc}
-\usepackage{amssymb}
-\usepackage{amsmath}
-\usepackage{graphicx}
-\graphicspath{ {images/} }
-\usepackage{times}
-\usepackage{geometry}
-\usepackage{setspace}
-\usepackage{tocloft}
-\usepackage{datetime}
-\usepackage{tabu}
-\usepackage{fancyhdr}
-\geometry{a4paper, tmargin=1in, rmargin=1in, bmargin=1in, lmargin=1.5in}
+
+\documentclass[12pt,a4paper,twoside,english,spanish]{book} % oneside
+
+\usepackage{mypreamble} 
+
 
 \begin{document}
+    %\let\cleardoublepage\clearpage % Remove blank pages between chapters
+    \pagenumbering{roman}
+    \renewcommand{\refname}{}
 
- latex
+    %%--------------- TITLE PAGE ------------------%%
+    \input{lib/0-portada}
+    \input{lib/0.1-contraportada}
 
+  % Table of contents
+  \newpage
+  \pdfbookmark{\contentsname}{toc}
+  \renewcommand*\contentsname{\centering TABLA DE CONTENIDO}
+  \tableofcontents
+
+  % List of tables
+  \newpage
+  \renewcommand{\listtablename}{\centering LISTA DE TABLAS}
+  \listoftables
+  \addcontentsline{toc}{chapter}{LISTA DE TABLAS}
+
+  % List of figures
+  \newpage
+  \renewcommand{\listfigurename}{\Centering LISTA DE FIGURAS}
+  \listoffigures
+  \addcontentsline{toc}{chapter}{LISTA DE FIGURAS}
+
+  % List of acronyms
+  \clearpage
+  \renewcommand{\acronymname}{\centering LISTA DE ACRÓNIMOS}
+  \printglossary[type=\acronymtype, style=mystyle]
+  %\printglossary
+  \addcontentsline{toc}{chapter}{LISTA DE ACRÓNIMOS}
+
+
+  \newpage
+  \pagenumbering{arabic}
+
+  % Chapters
+  \mainmatter
+  \input{lib/0.1-intro}
+  \input{lib/1cap}
+  \input{lib/2cap}
+  \input{lib/3cap}
+  \input{lib/4cap}
+
+  % References 
+  \begin{center}
+      \chapter{REFERENCIAS}
+      \printbibliography
+  \end{center}
+  \renewcommand*{\UrlFont}{\rmfamily}
+
+  % Appendix
+  \appendix
+  \include{lib/appendix}
+
+  \backmatter
 
 \end{document}
